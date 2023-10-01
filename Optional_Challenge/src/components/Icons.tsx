@@ -82,8 +82,8 @@ export function WindIcon() {
 export function UmbrellaIcon() {
   return (
     <svg
-      width="25.74"
-      height="24.26"
+      width="32"
+      height="30"
       viewBox="0 0 20 17"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
