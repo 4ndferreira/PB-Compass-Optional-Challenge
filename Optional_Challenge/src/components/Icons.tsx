@@ -1,8 +1,8 @@
 export function HumidityIcon() {
   return (
     <svg
-      width="8"
-      height="11"
+      width="13.37"
+      height="18.46"
       viewBox="0 0 8 11"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +49,8 @@ export function SearchIcon() {
 export function WindIcon() {
   return (
     <svg
-      width="14"
-      height="10"
+      width="22.95"
+      height="15.78"
       viewBox="0 0 14 10"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -82,8 +82,8 @@ export function WindIcon() {
 export function UmbrellaIcon() {
   return (
     <svg
-      width="20"
-      height="17"
+      width="25.74"
+      height="24.26"
       viewBox="0 0 20 17"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
