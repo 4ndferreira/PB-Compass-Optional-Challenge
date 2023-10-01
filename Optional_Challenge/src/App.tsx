@@ -6,44 +6,42 @@ import NavBar from './components/NavBar'
 import CurrentDate from './components/CurrentDate'
 import CurrentWeather from './components/CurrentWeather'
 import WeatherInfos from './components/WeatherInfos'
+import Loader from './components/Loader'
+import ErrorPage from './components/ErrorPage'
 
 const apiKey = process.env.API_KEY
 
+const styles = {
+  container: [
+    'px-6', 
+    'py-3', 
+    'max-w-md', 
+    'h-full', 
+    'space-y-2', 
+    'container', 
+    'mx-auto'
+  ].join(' '),
+  title: [
+    'text-3xl', 
+    'text-gray-800'
+  ].join(' ')
+}
+
 interface WeatherData {
-  name: string;
-  sys: {
-    country: string;
-  }
-  main: {
-    humidity: number;
-    temp: number;
-  };
-  weather: [
-    {
-      icon: string;
-      main: string;
-    }
-  ];
-  wind: {
-    speed: number;
-  }; 
-  forecast: [
-    {
-      pop: number,
-    }
-  ]
+  icon: string;
+  temperature: number;
+  description: string;
+  windSpeed: string;
+  humidity: number;
+  city: string;
+  country: string;
+  rainProbability: number;
 }
 
-interface ForecastData {
-  list: [{
-    pop: number
-  }]
-}
-
-const App = () => {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
-  const [forecastData, setForecastData] = useState<ForecastData | null>(null)
+export default function App() {
+  const [weather, setWeather] = useState<WeatherData | null>(null)
   const [isLoading, setIsLoading] = useState (true)
+  const [error, setError] = useState<string | null> (null);
 
   useEffect(() => {
     if ('geolocation' in navigator){
@@ -68,64 +66,63 @@ const App = () => {
       axios.get(dailyForecastData)
     ])
     .then(axios.spread((res1, res2) => {
-      setWeatherData(res1.data);
-      setForecastData(res2.data)
+      const currentWeather = res1.data;
+      const forecast = res2.data;
+      console.log(currentWeather)
+
+      const weatherData = {
+        icon: currentWeather.weather[0].icon,
+        temperature: Math.round(currentWeather.main.temp),
+        description: currentWeather.weather[0].main,
+        windSpeed: (currentWeather.wind.speed * 3.6).toFixed(2),
+        humidity: currentWeather.main.humidity,
+        city: currentWeather.name,
+        country: countryList().getLabel(currentWeather.sys.country),
+        rainProbability: forecast.list[0].pop
+      }
+      setWeather(weatherData)
       setIsLoading(false)
+      setError(null)
     }))
     .catch((err) => console.error(err));
-    setIsLoading(false)
+    setError('An error occurred. Awkward...')
   };
 
-  //console.log(weatherData)
-  //console.log(forecastData)
-  
-  const weatherForecast = {
-    icon: weatherData?.weather[0].icon,
-    temperature: weatherData && Math.round(weatherData?.main.temp),
-    description: weatherData?.weather[0].main,
-    windSpeed: weatherData && (weatherData.wind.speed * 3.6).toFixed(2),
-    humidity: weatherData?.main.humidity,
-    city: weatherData?.name,
-    country: weatherData && countryList().getLabel(weatherData?.sys.country),
-    rainProbability: forecastData?.list[0].pop
-  }
-
   if (isLoading) return (
-    <div className="flex flex-col justify-center items-center h-screen space-y-4 m-auto">
-      <p className='text-3xl text-customDarkGray animate-pulse'>
-        Loading...
-      </p>  
-      <div 
-        className="inline-block h-14 w-14 animate-spin rounded-full border border-customDarkGray border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-        role="status">
-      </div>
-    </div>
+    <Loader />
+  );
+
+  if (error) return (
+    <ErrorPage>
+      {error}
+    </ErrorPage>
   );
   
   return (
     <>
       <NavBar />
-      <main className="px-6 py-3 max-w-md h-full space-y-2 container mx-auto">
+      <main className={styles.container}>
         <header>
-          {<h1 className="text-3xl text-gray-800">
-            {weatherForecast.city},<br />
-            {weatherForecast.country}
+          {weather && 
+          <h1 className={styles.title}>
+            {weather.city},<br />
+            {weather.country}
           </h1>}
           <CurrentDate />
         </header>
+        {weather && 
         <CurrentWeather
-          icon={weatherForecast.icon}
-          temperature={weatherForecast.temperature}
-          description={weatherForecast.description}
-        />
+          icon={weather.icon}
+          temperature={weather.temperature}
+          description={weather.description}
+        />}
+        {weather && 
         <WeatherInfos
-          rain={weatherForecast?.rainProbability}
-          windSpeed={weatherForecast?.windSpeed}
-          humidity={weatherForecast?.humidity}
-        />
+          rain={weather.rainProbability}
+          windSpeed={weather.windSpeed}
+          humidity={weather.humidity}
+        />}
       </main>
     </>
   );
 }
-
-export default App
