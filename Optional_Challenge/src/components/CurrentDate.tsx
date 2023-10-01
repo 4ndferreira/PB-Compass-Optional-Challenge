@@ -1,4 +1,11 @@
-const CurrentDate = () => {
+const styles = {
+  date: [
+    'text-sm', 
+    'text-customGray'
+  ].join(' ')
+}
+
+export default function CurrentDate() {
   const formatDate: Intl.DateTimeFormatOptions = {
     weekday: "short",
     month: "short",
@@ -9,8 +16,6 @@ const CurrentDate = () => {
   const showCurrentDate = today.toLocaleDateString("en-US", formatDate);
   //console.log(showCurrentDate);
   return (
-    <p className='text-sm text-customGray'>{showCurrentDate}</p>
+    <p className={styles.date}>{showCurrentDate}</p>
   )
 }
-
-export default CurrentDate
