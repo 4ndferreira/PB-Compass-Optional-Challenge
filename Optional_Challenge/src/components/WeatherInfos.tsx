@@ -1,28 +1,29 @@
 import WeatherInfoCard from "./WeatherInfoCard";
+import {HumidityIcon, UmbrellaIcon, WindIcon} from "./Icons"
 
-const WeatherInfos: React.FC<{
+export default function WeatherInfos(props: { 
   rain: number | undefined;
   windSpeed: string | null;
-  humidity: number | undefined;
-}> = ({ rain, windSpeed, humidity }) => {
+  humidity: number | undefined; 
+}) {
   const weatherInfo = [
     {
       id: 1,
-      icon: "Umbrella.svg",
+      icon: <UmbrellaIcon />,
       text: "Rain probability",
-      value: `${rain}%`,
+      value: `${props.rain}%`,
     },
     {
       id: 2,
-      icon: "Wind.svg",
+      icon: <WindIcon />,
       text: "Wind",
-      value: `${windSpeed} km/h`,
+      value: `${props.windSpeed} km/h`,
     },
     {
       id: 3,
-      icon: "Humidity.svg",
+      icon: <HumidityIcon />,
       text: "Humidity",
-      value: `${humidity}%`,
+      value: `${props.humidity}%`,
     },
   ];
   return <section>
@@ -37,6 +38,4 @@ const WeatherInfos: React.FC<{
     ))}
   </ul>
 </section>;
-};
-
-export default WeatherInfos;
+}
