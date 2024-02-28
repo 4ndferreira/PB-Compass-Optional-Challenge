@@ -6,13 +6,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        'sandy-beach': '#FEE3BC',
-        'customGray': '#9A938C',
-        'customDarkGray': '#303345'
+        grey: {
+          '9A938C': '#9A938C',
+          '303345': '#303345',
+        },
+        blue: {
+          '0077FF': '#0077FF',
+          '70B7FF': '#70B7FF',
+          'B1E2FF': '#B1E2FF',
+        },
+        purple: {
+          '1C0E2B': '#1C0E2B',
+          '0E2354': '#0E2354',
+          '343B6B': '#343B6B'
+        }
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
+      fontSize: {
+        '8xl': ['5.2rem']
+      }
     }
   },
   plugins: [],

@@ -4,6 +4,9 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-image: linear-gradient(to bottom, #FEE3BC, rgba(175, 175, 175, 0.8), white);
+  /* background: linear-gradient(to bottom, #FEE3BC, rgba(175, 175, 175, 0.8), white); */
+  /* background: linear-gradient(to bottom, #0E2354, #343B6B, #1C0E2B); */
+  /* background: linear-gradient(to bottom, #0077FF, #70B7FF, #B1E2FF); */
+  /* background: linear-gradient(to bottom, #87CEEB, #FFEA85); */
   height: 100vh;
 }
