@@ -28,7 +28,7 @@ const styles = {
   ].join(' '),
   text: [
     'text-xs', 
-    'text-customDarkGray'
+    'text-grey-303345'
   ].join(' ')
 }
 

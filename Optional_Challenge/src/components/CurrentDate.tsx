@@ -1,7 +1,7 @@
 const styles = {
   date: [
     'text-sm', 
-    'text-customGray'
+    'text-grey-9A938C'
   ].join(' ')
 }
 
@@ -14,7 +14,6 @@ export default function CurrentDate() {
 
   const today = new Date();
   const showCurrentDate = today.toLocaleDateString("en-US", formatDate);
-  //console.log(showCurrentDate);
   return (
     <p className={styles.date}>{showCurrentDate}</p>
   )

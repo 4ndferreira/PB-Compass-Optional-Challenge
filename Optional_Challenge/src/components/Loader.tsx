@@ -10,7 +10,7 @@ const styles = {
   ].join(' '),
   text: [
     'text-3xl',
-    'text-customDarkGray',
+    'text-grey-303345',
     'animate-pulse'
   ].join(' '),
   loader: [
@@ -20,7 +20,7 @@ const styles = {
     'animate-spin', 
     'rounded-full', 
     'border', 
-    'border-customDarkGray', 
+    'border-grey-303345', 
     'border-solid', 
     'border-current', 
     'border-r-transparent', 

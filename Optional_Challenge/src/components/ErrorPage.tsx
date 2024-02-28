@@ -10,7 +10,7 @@ const styles = {
   ].join(' '),
   text: [
     'text-3xl',
-    'text-customDarkGray',
+    'text-grey-303345',
     'text-center'
   ].join(' ')
 }
